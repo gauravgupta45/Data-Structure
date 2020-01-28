@@ -188,11 +188,6 @@ int main()
     cout<<"--------------------Create a List First-----------------"<<endl;
     cout<<endl<<"Enter List Size:"<<endl;
     cin>>n;
-    if(n<=0)
-    {
-        cout<<"Enter valid size!"<<endl;
-        return 0;
-    }
     cout<<endl<<"Enter List Values:"<<endl;
     for(int i=0;i<n;i++)
     {
