@@ -20,7 +20,7 @@ class A
         {
             node1* ptr;
             node1* newnode = new node1;
-            newnode->data=value;
+            newnode->data = value;
             if(start == NULL)
             {
                 start = newnode;
@@ -65,53 +65,104 @@ class A
             newnode->next = start;
         }
 
-        void insert_bef(int val, int val_bef)
+        int insert_bef(int val, int val_bef)
         {
+            int search_flag = 0;
             node1* ptr;
             node1* newnode = new node1;
             ptr = start;
             newnode->data = val;
 
-            if(start->data == val_bef)        //if the inputed no. is first, so while inserting before, start tag will be changed(so traverse to last node and change its next address to newnode.).
+            if(start->next == start)      //checking if the first value is val_bef or not. if not it will continue to traverse to last element to find if val_before is there in the list or not.
             {
-                while(ptr->next!=start)
-                    ptr = ptr->next;
-                ptr->next = newnode;
-                newnode->next = start;
-                start = newnode;
+                if(start->data == val_bef)
+                    search_flag = 1;
             }
             else
             {
-                while(ptr->next->data != val_bef)
-                    ptr = ptr->next;
-                newnode->next = ptr->next;
-                ptr->next = newnode;
+                ptr = ptr->next;
+                while(ptr!=start)   // we are checking the first element alone becoz the while loop will always be false (ptr!=start)(we have assisgned ptr=start above!)
+                {
+                    if(ptr->data == val_bef || start->data == val_bef)
+                        search_flag = 1;
+                    ptr=ptr->next;
+                }
             }
+            if(search_flag == 0)
+            {
+                cout<<endl<<"No such value in the list!"<<endl;
+                return 0;
+            }
+            else
+            {
+                ptr = start;
+                if(start->data == val_bef)        //if the inputed no. is first, so while inserting before, start tag will be changed(so traverse to last node and change its next address to newnode.).
+                {
+                    while(ptr->next!=start)
+                        ptr = ptr->next;
+                    ptr->next = newnode;
+                    newnode->next = start;
+                    start = newnode;
+                }
+                else
+                {
+                    while(ptr->next->data != val_bef)
+                        ptr = ptr->next;
+                    newnode->next = ptr->next;
+                    ptr->next = newnode;
+                }
 
-
+            }
+            return 0;
         }
 
-        void insert_aft(int val, int val_aft)
+        int insert_aft(int val, int val_aft)
         {
+            int search_flag = 0;
             node1* ptr;
             node1* newnode = new node1;
             newnode->data = val;
             ptr = start;
-            while(ptr->next!=start) // let suppose inputed no. is the last element of node so if we insert after it, next address of last node must be changed.
+
+            if(start->next == start)      //checking if the first value is val_bef or not. if not it will continue to traverse to last element to find if val_before is there in the list or not.
+            {
+                if(start->data == val_aft)
+                    search_flag = 1;
+            }
+            else
+            {
                 ptr = ptr->next;
-            if(ptr->data == val_aft)
-            {
-                newnode->next = start;
-                ptr->next = newnode;
+                while(ptr!=start)   // we are checking the first element alone becoz the while loop will always be false (ptr!=start)(we have assisgned ptr=start above!)
+                {
+                    if(ptr->data == val_aft || start->data == val_aft)
+                        search_flag = 1;
+                    ptr=ptr->next;
+                }
             }
-            else                        // in this case next address of last node remains same, because node is being inserted in the middle. that's why we have taken 2 different cases.
+            if( search_flag == 0)
             {
-                ptr = start;
-                while(ptr->data!=val_aft)
+                cout<<endl<<"No such value in the list!"<<endl;
+                return 0;
+            }
+            else
+            {   ptr = start;
+                while(ptr->next!=start) // let suppose inputed no. is the last element of node so if we insert after it, next address of last node must be changed.
                     ptr = ptr->next;
-                newnode->next = ptr->next;
-                ptr->next = newnode;
+                if(ptr->data == val_aft)
+                {
+                    newnode->next = start;
+                    ptr->next = newnode;
+                }
+                else                        // in this case next address of last node remains same, because node is being inserted in the middle. that's why we have taken 2 different cases.
+                {
+                    ptr = start;
+                    while(ptr->data!=val_aft)
+                        ptr = ptr->next;
+                    newnode->next = ptr->next;
+                    ptr->next = newnode;
+                }
             }
+            return 0;
         }
 
         void display()
@@ -133,7 +184,8 @@ int main()
 {
     int n,value;
     A obj;
-    cout<<"------------Create a List First-----------"<<endl;
+    cout<<"------------Insertion in Circular Linked List-----------"<<endl<<endl;
+    cout<<"--------------------Create a List First-----------------"<<endl;
     cout<<endl<<"Enter List Size:"<<endl;
     cin>>n;
     if(n<=0)
@@ -149,8 +201,8 @@ int main()
     }
 
     int choice,val,val_bef,val_aft;
-    cout<<endl<<"------------MENU-------------"<<endl<<endl;
-    cout<<"1. Insert at the Beginning."<<endl<<"2. Insert at the End."<<endl<<"3. Insert Before."<<endl<<"4. Insert After."<<endl<<"5. Display."<<endl<<endl;
+    cout<<endl<<"---------------------------MENU-------------------------"<<endl;
+    cout<<endl<<"1. Insert at the Beginning."<<endl<<"2. Insert at the End."<<endl<<"3. Insert Before."<<endl<<"4. Insert After."<<endl<<"5. Display."<<endl<<endl;
     cin>>choice;
     switch(choice)
     {
