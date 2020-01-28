@@ -32,7 +32,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="deletion.cpp" />
+		<Unit filename="deletion_single.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
