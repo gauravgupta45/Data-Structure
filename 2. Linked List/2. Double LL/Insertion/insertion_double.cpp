@@ -111,7 +111,6 @@ class A
         int insert_aft(int val, int val_aft)
         {
             int search_flag = 0;
-            node1* temp;
             node1* ptr;
             node1* newnode = new node1;
             newnode->data = val;
@@ -132,28 +131,23 @@ class A
 
             else
             {
-                //ptr = start;
-                //while(ptr != NULL)
-                //    ptr = ptr->next;
-                /*if(ptr->data == val_aft)      //ptr here, is on the last node(becoz of while loop above)
+
+                ptr = start;
+                while(ptr->data != val_aft)
+                    ptr = ptr->next;
+                if(ptr->next == NULL)      //ptr here, is on the last node(becoz of while loop above)
                 {
                     ptr->next = newnode;
                     newnode->next = NULL;
                     newnode->prev = ptr;
-                    return 0;
-                }*/
-                //else
-                //{
-                    ptr = start;
-                    while(ptr->data != val_aft)
-                        ptr = ptr->next;
-                    temp = ptr->next;
-                    newnode->next = temp;
-                    newnode->prev = ptr;
+                }
+                else
+                {
+                    newnode->next = ptr->next;
+                    ptr->next->prev=newnode;
                     ptr->next = newnode;
-                    temp->prev = newnode;
-                    return 0;
-                //}
+                    newnode->prev = ptr;
+                }
             }
         }
 
