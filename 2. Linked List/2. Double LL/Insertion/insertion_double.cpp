@@ -135,7 +135,7 @@ class A
                 ptr = start;
                 while(ptr->data != val_aft)
                     ptr = ptr->next;
-                if(ptr->next == NULL)      //ptr here, is on the last node(becoz of while loop above)
+                if(ptr->next == NULL) //checking if val_aft is equal to the value of last node. 
                 {
                     ptr->next = newnode;
                     newnode->next = NULL;
