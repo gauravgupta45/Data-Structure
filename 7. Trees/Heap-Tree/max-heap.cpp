@@ -2,35 +2,57 @@
 #include <cmath>
 using namespace std;
 
+const int mxN = 2e5;
+
+// insert() will take O(NlogN) time to build a heap of N Nodes. It is a Bottom-Top approch.
+// heapify() on other hand is much more efficient. It takes only O(N) time. It is a Top-Bottom approach.
+
 void insert(int *arr, int &n, int val)
 {
     n = n+1;
-    arr[n] = val;
+    arr[n-1] = val;
 
     // Let's mark our current position, we are on last node, where val is present.
-    int pos = n;
-    while(pos>1)
+    int pos = n-1;
+    while(pos>=1)
     {
-        int par = floor(pos/2);
+        int par = floor((pos-1)/2);
         if(arr[par]<=arr[pos])
         {
             int temp = arr[par];
             arr[par] = arr[pos];
             arr[pos] = temp;
             pos = par;
-            //cout << endl << val << " is inserted in the Heap." <<endl;
         }
         else
             return;
     }
+}
 
+void heapify(int *arr, int n, int i)
+{
+  int largest = i;
+  int l = 2*i+1;
+  int r = 2*i+2;
+
+  if (l < n && arr[l] > arr[largest])
+    largest = l;
+  if (r < n && arr[r] > arr[largest])
+    largest = r;
+  if (largest != i)
+  {
+    int temp = arr[largest];
+    arr[largest] = arr[i];
+    arr[i] = temp;
+    heapify(arr, n, largest);
+  }
 }
 
 void del(int *arr, int &n)
 {
-    int last = arr[n];
+    int last = arr[n-1];
     n = n-1;
-    int ptr = 1, left = 2, right = 3;
+    int ptr = 0, left = 1, right = 2;
     arr[ptr] = last;
     while(left <=  n)
     {
@@ -50,16 +72,16 @@ void del(int *arr, int &n)
             arr[right] = temp;
             ptr = right;
         }
-        left = 2*ptr;
-        right = left+1;
+        left = 2*ptr+1;
+        right = 2*ptr+2;
     }
 
 }
 
-void display(int *arr, int &n)
+void display(int *arr, int n)
 {
     cout<<endl<<"Heap Tree is: ";
-    for(int i=1;i<=n;i++)
+    for(int i = 0; i < n; i++)
         cout << arr[i]<<"\t";
     cout << endl;
 }
@@ -67,16 +89,22 @@ void display(int *arr, int &n)
 
 int main()
 {
-    int root_val;
-    cout << "Enter Root Value: ";
-    cin >> root_val;
-    int arr[] = {root_val};
-    int n = sizeof(arr)/sizeof(arr[0]);
+    cout<<endl<<"-----------------------Heap Tree-------------------------"<<endl;
+
+    int n, arr[mxN];
+    cout << "Enter Array Size: ";
+    cin >> n;
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    for(int i = n/2-1; i >= 0; i--)
+        heapify(arr,n,i);
+    cout <<endl << "Heap Built with O(N) time complexity! [Heapify Method]"  << endl;
+    display(arr,n);
 
     int ins_val, ch=-1;;
     while(ch!=4)
     {
-        cout<<endl<<"-----------------------Heap Tree-------------------------"<<endl;
         cout<<endl<<"1. Insert"<<endl<<"2. Delete Root Node"<<endl<<"3. Display"<<endl<<"4. Exit"<<endl;
         cout<<endl<<"Enter Your Choice: ";
         cin>>ch;
@@ -87,28 +115,19 @@ int main()
                 cout<<endl<<"Enter Value to be inserted in the Heap: ";
                 cin>>ins_val;
                 insert(arr,n,ins_val);
+                cout << endl << "Value inserted with O(logN) time complexity! [Insertion Method]"  << endl;
+                display(arr,n);
                 break;
+
             case 2:
                 del(arr,n);
-                cout << "Root Value has been deleted!" << endl;
+                cout << endl << "Root Value has been deleted!" << endl;
+                display(arr,n);
                 break;
             case 3:
                 display(arr,n);
                 break;
         }
     }
-
-    // insert(arr,n,36);
-    // insert(arr,n,54);
-    // insert(arr,n,27);
-    // insert(arr,n,63);
-    // insert(arr,n,72);
-    // insert(arr,n,61);
-    // insert(arr,n,18);
-    // display(arr,n);
-    //
-    // del(arr,n);
-    // display(arr,n);
-
     return 0;
 }
