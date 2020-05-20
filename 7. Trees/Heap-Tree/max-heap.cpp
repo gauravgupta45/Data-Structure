@@ -5,7 +5,7 @@ using namespace std;
 const int mxN = 2e5;
 
 // insert() will take O(NlogN) time to build a heap of N Nodes. It is a Bottom-Top approch.
-// heapify() on other hand is much more efficient. It takes only O(N) time. It is a Top-Bottom approach.
+// heapify() on other hand is much more efficient. It takes only O(N) time.
 
 void insert(int *arr, int &n, int val)
 {
