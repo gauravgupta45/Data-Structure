@@ -52,12 +52,13 @@ void del(int *arr, int n)
         left = 2*ptr+1;
         right = 2*ptr+2;
     }
+
 }
 
 void heapsort(int *arr, int n)
 {
     // Swap the first and last elem of arr. Delete the last elem and then heapify the resulting tree.
-    int f_arr[n] = {};
+    int* f_arr = new int[n];
     int k = n-1;
     while(k >= 0)
     {
@@ -69,13 +70,13 @@ void heapsort(int *arr, int n)
         for (int i = n/2-1; i >= 0; i--)
             heapify(arr, n, i);
     }
-    cout<<endl<<"Sorted Array is: " << '\t';
-    display(f_arr,sizeof(f_arr)/sizeof(f_arr[0]));
+    arr = f_arr;
+    delete[] f_arr;
 }
 
 void display(int *arr, int n)
 {
-    // cout<<endl<<"Heap Tree is: " << '\t';
+    cout<<endl<<"Sorted Array is: " << '\t';
     for(int i = 0; i < n; i++)
         cout << arr[i] << "\t";
     cout << endl;
@@ -91,11 +92,10 @@ int main()
     for (int i = 0; i < n; i++)
         cin >> arr[i];
         
-    // Heapify the array.
+    // Heapifying the array
     for(int i = n/2-1; i >= 0; i--)
         heapify(arr,n,i);
-    
     heapsort(arr,n);
-
+    display(arr,n);
     return 0;
 }
