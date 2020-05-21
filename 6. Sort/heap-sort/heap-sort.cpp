@@ -91,7 +91,7 @@ int main()
     for (int i = 0; i < n; i++)
         cin >> arr[i];
         
-    // Heapifying the array
+    // Heapifying the array (From the parent of leaf node i.e. n/2 -1)
     for(int i = n/2-1; i >= 0; i--)
         heapify(arr,n,i);
     heapsort(arr,n);
