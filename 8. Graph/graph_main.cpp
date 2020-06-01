@@ -117,7 +117,13 @@ void LinkedGraph :: AddAdj(char Vertex, char Vertex_edge)
         Node* newnode = new Node(Vertex_edge);
         temp2->next = newnode;
     }
-    // Comment the followed line if you want the graph to be undirected.
+    // Uncomment the followed line if you want the graph to be undirected. (Use it when w/o menu interface.)
+//         if(c==1)
+//     {
+//         c++;
+//         AddAdj(Vertex_edge,Vertex);
+//         c--;
+//     }
 
 }
 
