@@ -6,7 +6,9 @@
 #include <cmath>
 using namespace std;
 
-// int c = 1;                     // This is for directed and undirected graph operation
+// int c = 1;                     // This is for directed and undirected graph operation (use it w/o menu)
+int d = 1;
+stack <char> f_s;
 queue <char> f_q;
 // In C++ programming, this is a keyword that refers to the current instance/object of the class. There can be 3 main usage of this keyword in C++.
 
@@ -30,10 +32,6 @@ class Node
             this->vertex = vertex;
             this->next = NULL;
             this->adj = NULL;
-        }
-        char getname(Node* t)
-        {
-            return t->vertex;
         }
         friend class LinkedGraph;
 };
@@ -117,7 +115,7 @@ void LinkedGraph :: AddAdj(char Vertex, char Vertex_edge)
         Node* newnode = new Node(Vertex_edge);
         temp2->next = newnode;
     }
-    // Uncomment the followed line if you want the graph to be undirected. (Use it when w/o menu interface.)
+    // Uncomment the followed line if you want the graph to be directed. (Use it when w/o menu interface.)
 //         if(c==1)
 //     {
 //         c++;
@@ -229,7 +227,103 @@ void LinkedGraph :: bfs()
 
 void LinkedGraph :: dfs()
 {
-    cout << endl << "Wait for few days :)" << endl;
+    cout << endl << "" << endl;
+    
+    // Get the number of vertices (n) in Graph, so that we can create a queue of that size.
+    int n = 0;
+    Node* ptrforsize = head;
+    while(ptrforsize != NULL)
+    {
+        ptrforsize = ptrforsize->next;
+        n++;
+    }
+    int visited[n] = {0};
+
+    // Getting the user defined start point.
+    char start_data;
+    cout << endl << "Enter Starting Vertex: ";
+    cin >> start_data;
+
+    // Inserting the start vertex in the queue.
+    f_s.push(start_data);
+
+    // Find the index of current vertex, so that we can mark it visited in visited array.
+    Node* ptrforindex = head;
+    int index = 0;
+    while(ptrforindex->vertex != start_data)
+    {
+        ptrforindex = ptrforindex->next;
+        index++;
+    }
+    visited[index] = 1;
+
+    // Traversing the whole graph from the start node, which user entered, untill the queue becomes empty.
+    cout << endl << "DFS traversal is: ";
+    cout << start_data << " ";
+    while(!f_s.empty())
+    {
+        // cout << "Stack is: " << endl ;
+        // showstack(f_s);
+        // char s = f_s.top();   // this (s) will only be used once when start data is incoming.
+
+        //Removing the front elem as we have now address of its adj elements in ptrforvertex.
+        if(d == 1)
+            d++;
+        else
+            f_s.pop();
+
+        // Getting the node address of current node and storing it in ptrforvertex.
+        Node* ptrforvertex = head;
+        while(ptrforvertex->vertex != f_s.top())
+            ptrforvertex = ptrforvertex->next;
+
+        // Getting ptrforvertex point to its adj.
+        while(ptrforvertex != NULL)
+        {
+            Node* temp = head;
+            if(ptrforvertex->adj == NULL)
+            {
+                // cout << endl << "PTR with null adj : " <<  ptrforvertex->vertex;
+                ptrforindex = head;
+                int index = 0;
+                while(ptrforindex->vertex != ptrforvertex->vertex)
+                {
+                    ptrforindex = ptrforindex->next;
+                    index++;
+                }
+                if(visited[index] == 0)
+                {
+                    cout << ptrforvertex->vertex <<" ";
+                    visited[index] = 1;
+                    f_s.push(ptrforvertex->vertex);
+                }
+                return;
+            }
+            else{
+            ptrforvertex = ptrforvertex->adj;
+            // Getting the index of the current node element.
+            ptrforindex = head;
+            int index = 0;
+            while(ptrforindex->vertex != ptrforvertex->vertex)
+            {
+                ptrforindex = ptrforindex->next;
+                index++;
+            }
+            if(visited[index] == 0)
+            {
+                cout << ptrforvertex->vertex <<" ";
+                visited[index] = 1;
+                f_s.push(ptrforvertex->vertex);
+            }
+            else
+                ptrforvertex = ptrforvertex->adj;
+            while(temp->vertex != ptrforvertex->vertex)
+                temp = temp->next;
+            ptrforvertex = temp;
+            }
+        }
+    }
+    
 }
 
 
@@ -280,7 +374,7 @@ int main()
             break;
 
         case 6:
-            cout << endl << "DFS Traversal is :"<< endl;
+            cout << endl << "DFS Traversal is (Under Dev! This won't work in some cases) :"<< endl;
             obj1.dfs();
             break;
         }
