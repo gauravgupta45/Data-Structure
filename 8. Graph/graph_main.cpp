@@ -380,27 +380,32 @@ int main()
         }
     }while(ch!=7);
 
-    // n = new Node('H');
-    // obj1.AddVertex(n);
-    // n = new Node('B');
-    // obj1.AddVertex(n);
-    // n = new Node('D');
-    // obj1.AddVertex(n);
-    // n = new Node('M');
-    // obj1.AddVertex(n);
-    //
-    // obj1.AddAdj('H','B');
-    // obj1.AddAdj('H','M');
-    // obj1.AddAdj('H','D');
-    //
-    // obj1.ShowVertex();
-    //
-    // obj1.ShowAdj('H');
-    // obj1.ShowAdj('B');
-    // obj1.ShowAdj('D');
-    // obj1.ShowAdj('M');
-    //
-    // obj1.bfs();
+//     n = new Node('H');
+//     obj1.AddVertex(n);
+//     n = new Node('B');
+//     obj1.AddVertex(n);
+//     n = new Node('D');
+//     obj1.AddVertex(n);
+//     n = new Node('M');
+//     obj1.AddVertex(n);
+
+//     obj1.AddAdj('H','B');
+//     obj1.AddAdj('H','D');
+//     obj1.AddAdj('H','M');
+//     obj1.AddAdj('D','B');
+//     obj1.AddAdj('D','H');
+//     obj1.AddAdj('B','M');
+//     obj1.AddAdj('M','D');
+
+
+//     obj1.ShowVertex();
+
+//     obj1.ShowAdj('H');
+//     obj1.ShowAdj('B');
+//     obj1.ShowAdj('D');
+//     obj1.ShowAdj('M');
+    
+//     obj1.bfs();
 
     return 0;
 }
