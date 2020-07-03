@@ -63,28 +63,35 @@ class A
                 root->left = delete_node(root->left,val);
             else if(val > root->data)
                 root->right = delete_node(root->right,val);
-
-            else if(root->left && root->right)                  //case in which node has two child
+            else                                                 // Caught the value which needs to be deleted
             {
-                temp = largest_node(root->left);
-                root->data = temp->data;
-                delete_node(root->left,temp->data);
-            }
-
-            else                                                //case in which node has one or no child
-            {
-                if(root->left == NULL && root->right == NULL)   //no child
+                if(root->left == NULL && root->right == NULL)    //Case 1: no child
+                {
+                    delete root;
                     root = NULL;
-                else if(root->left != NULL)                     //either left child
-                    root->left = NULL;
-                else                                            //or right child only
-                    root->right = NULL;
-
-                delete temp;
+                }
+                else if(root->left == NULL)                      //Case 2: either left child
+                {
+                    temp = root;
+                    root = root->right;
+                    delete temp;
+                }
+                else if(root->right == NULL)                     //or right child only
+                {
+                    temp = root;
+                    root = root->left;
+                    delete temp;
+                }
+                else                                             //case in which node has two child
+                {
+                    temp = largest_node(root->left);
+                    root->data = temp->data;
+                    root->left = delete_node(root->left,temp->data);
+                }
             }
             return root;
         }
-
+    
         void Preorder(node* root)
         {
             if(root == NULL)
