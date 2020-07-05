@@ -50,8 +50,9 @@ class A
             else
                 return largest_node(root->right);
         }
-
-        node* delete_node(node* root,int val)
+    
+        // Deleting a node may result in changing of root node, that's why we return the root elemnt everytime when calling delete_node().
+        node* delete_node(node* root,int val)   
         {
             node* temp = new node();
             if(root == NULL)
@@ -65,12 +66,12 @@ class A
                 root->right = delete_node(root->right,val);
             else                                                 // Caught the value which needs to be deleted
             {
-                if(root->left == NULL && root->right == NULL)    //Case 1: no child
+                if(root->left == NULL && root->right == NULL)    //Case 1: node has no child
                 {
                     delete root;
                     root = NULL;
                 }
-                else if(root->left == NULL)                      //Case 2: either left child
+                else if(root->left == NULL)                      //Case 2: node has either left child
                 {
                     temp = root;
                     root = root->right;
@@ -82,7 +83,7 @@ class A
                     root = root->left;
                     delete temp;
                 }
-                else                                             //case in which node has two child
+                else                                             //Case 3: node has two child
                 {
                     temp = largest_node(root->left);
                     root->data = temp->data;
