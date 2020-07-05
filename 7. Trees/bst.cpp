@@ -120,7 +120,7 @@ class A
             cout<<root->data<<endl;
         }
 
-        int getHeight(node* node)
+        int getHeight(node* node)      // Considering height to be 1, if only root element is present.
         {
             if (node == NULL)
                 return 0;
@@ -137,7 +137,6 @@ class A
                     return(rDepth + 1);
             }
         }
-
 };
 
 
