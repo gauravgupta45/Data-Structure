@@ -22,9 +22,9 @@ class A
                 root->right = NULL;
             }
 
-            else if(val <= root->data)
+            else if(val < root->data)
                 root->left = insert(root->left,val);
-            else
+            else if(val > root->data)
                 root->right = insert(root->right,val);
             return root;
         }
