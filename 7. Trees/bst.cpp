@@ -8,7 +8,6 @@ struct node
     node* right;
 };
 
-
 class A
 {
     public:
@@ -32,7 +31,7 @@ class A
 
         int searching(node* root, int val)
         {
-            if(root==NULL)
+            if(root == NULL)
                 return 0;
             else if(val == root->data)
                 return 1;
@@ -45,10 +44,11 @@ class A
 
         node* largest_node(node* root)
         {
-            if(root == NULL || root->right == NULL)
-                return root;
-            else
-                return largest_node(root->right);
+//             if(root == NULL || root->right == NULL)
+//                 return root;
+//             else
+//                 return largest_node(root->right);
+            return (root == NULL || root->right == NULL) ? root : largest_node(root->right); 
         }
     
         // Deleting a node may result in changing of root node, that's why we return the root elemnt everytime when calling delete_node().
@@ -57,7 +57,7 @@ class A
             node* temp = new node();
             if(root == NULL)
             {
-                cout<<"Value not Found!"<<endl;
+                cout << "Value not Found!" << endl;
                 return root;
             }
             else if(val < root->data)
@@ -97,7 +97,7 @@ class A
         {
             if(root == NULL)
                 return;
-            cout<<root->data<<endl;
+            cout << root->data<<endl;
             Preorder(root->left);
             Preorder(root->right);
         }
@@ -107,7 +107,7 @@ class A
             if(root == NULL)
                 return;
             Inorder(root->left);
-            cout<<root->data<<endl;
+            cout << root->data << endl;
             Inorder(root->right);
         }
 
@@ -117,7 +117,7 @@ class A
                 return;
             Postorder(root->left);
             Postorder(root->right);
-            cout<<root->data<<endl;
+            cout << root->data << endl;
         }
 
         int getHeight(node* node)      // Considering height to be 1, if only root element is present.
@@ -131,10 +131,7 @@ class A
                 int rDepth = getHeight(node->right);
 
                 /* use the larger one */
-                if (lDepth > rDepth)
-                    return(lDepth + 1);
-                else
-                    return(rDepth + 1);
+                return lDepth > rDepth ? (lDepth + 1) : (rDepth + 1); 
             }
         }
 };
@@ -145,8 +142,8 @@ int main()
     A obj;
     int val;
     node* root = NULL;
-    cout<<endl<<"----------------# Tree  Menu #------------------"<<endl;
-    cout<<endl<<"1. Insert"<<endl<<"2. Search"<<endl<<"3. Delete"<<endl<<"4. Display"<<endl<<"5. Height"<<endl<<"6. Exit"<<endl<<endl;
+    cout << endl << "----------------# Tree  Menu #------------------" << endl;
+    cout << endl << "1. Insert" << endl << "2. Search" << endl << "3. Delete" << endl << "4. Display" << endl << "5. Height" << endl << "6. Exit" <<endl << endl;
     int ch;
     cin>>ch;
     do{
@@ -154,8 +151,8 @@ int main()
     {
         case 1:
         {
-            cout<<"Enter Data:"<<endl;
-            cin>>val;
+            cout << endl << "Enter Data:" << endl;
+            cin >> val;
             root = obj.insert(root,val);
             break;
         }
@@ -163,66 +160,46 @@ int main()
         case 2:
         {
             int search_val;
-            cout<<endl<<"Enter Value to Serach in Tree: "<<endl;
-            cin>>search_val;
+            cout << endl << "Enter Value to Serach in Tree: " << endl;
+            cin >> search_val;
 
             int search_flag = obj.searching(root,search_val);
             if(search_flag == 1)
-                cout<<endl<<search_val<<" is present in Tree!"<<endl;
+                cout << endl << search_val << " is present in Tree!" << endl;
             else
-                cout<<endl<<search_val<<" is not present in Tree!"<<endl;
+                cout << endl << search_val << " is not present in Tree!" << endl;
             break;
         }
         case 3:
         {
-            cout<<endl<<"Enter Value to be Deleted: "<<endl;
+            cout << endl << "Enter Value to be Deleted: " << endl;
             int del_val;
-            cin>>del_val;
+            cin >> del_val;
             root = obj.delete_node(root,del_val);
             break;
         }
         case 4:
         {
-            cout<<endl<<"Content of Tree: "<<endl;
-            cout<<endl<<"--------------# Pre-Order #--------------"<<endl;
+            cout << endl << "Content of Tree: " << endl;
+            cout << endl<< "--------------# Pre-Order #--------------" << endl;
             obj.Preorder(root);
-            cout<<endl<<"--------------# In-Order #--------------"<<endl;
+            cout << endl << "--------------# In-Order #--------------" << endl;
             obj.Inorder(root);
-            cout<<endl<<"--------------# Post-Order #--------------"<<endl;
+            cout << endl << "--------------# Post-Order #--------------" << endl;
             obj.Postorder(root);
-            /*int ch_disp;
-            cout<<endl<<"1. Preorder"<<endl<<"2. Inorder"<<endl<<"3. Postorder"<<endl;
-            cin>>ch_disp;
-            if(ch_disp == 1)
-            {
-                cout<<endl<<"--------------# Pre-Order #--------------"<<endl;
-                obj.Preorder(root);
-            }
-
-            else if(ch_disp == 2)
-            {
-                cout<<endl<<"--------------# In-Order #--------------"<<endl;
-                obj.Inorder(root);
-            }
-            else if(ch_disp == 3)
-            {
-                cout<<endl<<"--------------# Post-Order #--------------"<<endl;
-                obj.Postorder(root);
-            }
-            else
-                cout<<endl<<"Invalid Option!"<<endl;
-            break;*/
+            break;
         }
 
         case 5:
         {
             cout << "Height of tree is " << obj.getHeight(root);
+            break;
         }
-
-
+        default:
+            cout << endl << "Invalid Option!" << endl;
     }
-    cout<<endl<<"1. Insert"<<endl<<"2. Search"<<endl<<"3. Delete"<<endl<<"4. Display"<<endl<<"5. Height"<<endl<<"6. Exit"<<endl;
-    cin>>ch;
+    cout << endl << "1. Insert" << endl << "2. Search" << endl << "3. Delete" << endl << "4. Display" << endl << "5. Height" << endl << "6. Exit" << endl << endl;
+    cin >> ch;
 
 
 }while(ch!=6);
