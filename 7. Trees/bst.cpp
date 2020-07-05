@@ -198,7 +198,7 @@ int main()
         default:
             cout << endl << "Invalid Option!" << endl;
     }
-    cout << endl << "1. Insert" << endl << "2. Search" << endl << "3. Delete" << endl << "4. Display" << endl << "5. Height" << endl << "6. Exit" << endl << endl;
+    cout << endl << endl << "1. Insert" << endl << "2. Search" << endl << "3. Delete" << endl << "4. Display" << endl << "5. Height" << endl << "6. Exit" << endl << endl;
     cin >> ch;
 
 
