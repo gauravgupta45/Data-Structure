@@ -182,9 +182,9 @@ class A
                 {
                     while(ptr->next->data!=node_val)
                         ptr=ptr->next;
-                    temp=ptr->next;
+                    temp=ptr->next->next;
                     delete ptr->next;
-                    ptr->next=temp->next;
+                    ptr->next=temp;
                 }
             }
         }
